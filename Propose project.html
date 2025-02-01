@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Girlfriend?</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('https://i.imgur.com/euL8gPq.jpeg'); /* यहां अपनी इमेज का URL डालें */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 5px black;
+        }
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px black;
+        }
+        .yes {
+            background-color: #28a745;
+            color: white;
+        }
+        .no {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+    <script>
+        // Step 1: Firebase Configuration
+        const firebaseConfig = {
+  apiKey: "AIzaSyAQTcIT-u8arHKTN7bBu6CowFOtumpcZo4",
+  authDomain: "propose-project.firebaseapp.com",
+  databaseURL: "https://propose-project-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "propose-project",
+  storageBucket: "propose-project.firebasestorage.app",
+  messagingSenderId: "214802804526",
+  appId: "1:214802804526:web:8754b11755b70fe80ed4bf"
+};
+
+        // Step 2: Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Step 3: Store response in Firebase
+        function storeResponse(response) {
+            firebase.database().ref("responses").push({
+                answer: response,
+                timestamp: new Date().toISOString()
+            });
+            alert("Your response has been saved: " + response);
+        }
+    </script>
+</head>
+<body>
+    <h1>Will you be my girlfriend?</h1>
+    <button class="yes" onclick="storeResponse('Yes')">Yes</button>
+    <button class="no" onclick="storeResponse('No')">No</button>
+</body>
+</html>
